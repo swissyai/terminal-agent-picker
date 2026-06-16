@@ -130,7 +130,14 @@ Currently this is wired for Claude Code. Replacement mode uses `--system-prompt-
 
 The picker support is generic. Any agent can expose a system-prompt step if its CLI has a real prompt-file flag; add `*_sysprompt_replace_file` or `*_sysprompt_append_file` to that agent entry. The bundled defaults only enable it where the flag has been verified.
 
-Local scratch prompts can live under `local-prompts/`, which is gitignored. Example flow:
+Local scratch prompts can live under `local-prompts/`, which is gitignored:
+
+```sh
+mkdir -p ~/.config/terminal-agent-picker/local-prompts
+$EDITOR ~/.config/terminal-agent-picker/local-prompts/Fable5prompt.md
+```
+
+Then type the short filename when the picker asks for the prompt path. Example flow:
 
 ```text
 1   # Claude Code
