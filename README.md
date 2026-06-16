@@ -96,6 +96,16 @@ Open a new terminal. Existing terminals are unaffected. `install.sh --uninstall`
 
 If no menu appears, either the terminal did not start an interactive supported shell, the matching source line was not read, or no supported agent binary is on `PATH`.
 
+## Update
+
+If you installed to the README path, update with:
+
+```sh
+git -C ~/.config/terminal-agent-picker pull --ff-only
+```
+
+Open a new terminal after updating. If you customized `terminal-agent-picker.sh`, commit or stash your local changes before pulling.
+
 ## Verified vs best-effort agents
 
 Five agents are verified locally (installed, binary and flags checked): **Claude Code, OpenAI Codex CLI, Google Gemini CLI, opencode, Cursor**. Cursor's binary is verified; its `--model`/`--mode` flags are best-effort, since `cursor-agent --help` prints nothing in a non-tty.
@@ -117,6 +127,8 @@ Auto runs an agent with no approval prompts. Use it only in a sandbox or a trust
 After the permission menu, supported agents show a system prompt step. Press Enter for no custom prompt, or choose replacement mode to pass a file with `--system-prompt-file`. It asks for a normal file path, checks the current folder, the picker install folder, and the picker's ignored `local-prompts/` folder. The older `@path/to/file` form still works.
 
 Currently this is wired for Claude Code. Replacement mode uses `--system-prompt-file` and replaces the system prompt for that launched session only. It is useful for experiments, but can change Claude Code's normal tool behavior. Session prompts are not saved in per-directory memory and are not reused by a future terminal unless you set them again.
+
+The picker support is generic. Any agent can expose a system-prompt step if its CLI has a real prompt-file flag; add `*_sysprompt_replace_file` or `*_sysprompt_append_file` to that agent entry. The bundled defaults only enable it where the flag has been verified.
 
 Local scratch prompts can live under `local-prompts/`, which is gitignored. Example flow:
 
@@ -156,6 +168,7 @@ NTAP_myagent_bins=$'myagent'
 NTAP_myagent_tmpl=$'myagent --model {model} {permission}'
 NTAP_myagent_models=$'fast\tFast\nstrong\tStrong'
 NTAP_myagent_perms=$'standard\t--ask\tStandard: asks first\tmedium\nauto\t--yes\tAuto: no prompts\thigh'
+NTAP_myagent_sysprompt_replace_file=$'--system-prompt-file'
 NTAP_myagent_defm=$'strong'
 NTAP_myagent_defr=$''
 NTAP_myagent_defp=$'standard'
@@ -166,7 +179,7 @@ NTAP_myagent_defp=$'standard'
 - **`*_tmpl`**: assembled at launch. The placeholders `{model}` / `{reasoning}` / `{permission}` decide which layers appear; an agent with no placeholders launches straight away.
 - **`*_models` / `*_reason`**: tab-separated menu rows, one row per line: `value<TAB>label`.
 - **`*_perms`**: tab-separated permission rows: `value<TAB>flag<TAB>label<TAB>risk`, where risk is `low`, `medium`, or `high`.
-- **`*_sysprompt_replace_file` / `*_sysprompt_append_file`**: optional flags for agents that accept a system prompt file. Claude Code uses replacement by default so the picker has just two choices: no prompt, or replace for this session.
+- **`*_sysprompt_replace_file` / `*_sysprompt_append_file`**: optional flags for agents that accept a system prompt file. Claude Code uses replacement by default so the picker has just two choices: no prompt, or replace for this session. Do not add these unless the agent's CLI actually supports the flag.
 - **`*_defm` / `*_defr` / `*_defp`**: defaults selected when you press Enter.
 
 ## How it works
