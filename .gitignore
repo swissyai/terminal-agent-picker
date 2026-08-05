@@ -17,3 +17,5 @@ __pycache__/
 local-prompts/
 
 # The shell source files are intentionally committed.
+
+TERMINAL-UX-RESEARCH.md
