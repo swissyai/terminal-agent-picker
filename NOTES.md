@@ -20,7 +20,10 @@ Internal notes for terminal-agent-picker. For user-facing docs see README.md; fo
 - cmux ships shim binaries in its bin dir (`claude`, `grok`, ...); `command -v` can false-positive. `claude`'s shim works; `grok`'s does not.
 - Gemini sunsets 2026-06-18 and migrates to Antigravity `agy`. Handled via multi-bin detection (`NTAP_gemini_bins=$'gemini agy'`). If `agy`'s flags differ from Gemini's, edit the Gemini template.
 - `cursor-agent --help` prints nothing in a non-tty, so its `--model` / `--mode` flags are best-effort.
+- GPT-5.6 Sol/Terra/Luna released 2026-07-09. Codex CLI 0.144.0 lists `gpt-5.6-sol`, `gpt-5.6-terra`, and `gpt-5.6-luna`; the default is Sol with medium reasoning. Sol/Terra support `ultra`, Luna supports through `max`.
 - Claude Fable 5 became generally available on 2026-06-09. Claude Code exposes it through the `fable` alias. It is first in the Claude model menu, but the default remains `sonnet` to avoid surprise cost/latency.
+- Claude Opus 5 released 2026-07-24 (`claude-opus-5`, $5/$25, 1M context default). Claude Code's `opus`/`sonnet` aliases now resolve to Opus 5 / Sonnet 5; the previous generation stays reachable via full ids (`claude-opus-4-8`, `claude-sonnet-4-6`). The old `opus[1m]`/`sonnet[1m]` rows were dropped because the 5-family has 1M context by default.
+- MODELS.md is the dated latest-models snapshot (frontier + open-weight for local runners). Refresh it alongside menu bumps; last verified 2026-08-05 via a 30-day research pass (Reddit/HN/YouTube/GitHub + web).
 - Bare-TUI agents (droid, crush, goose, etc.) do not expose model/reasoning/permission menus here; their settings come from the agent's own config.
 
 ## Design decisions

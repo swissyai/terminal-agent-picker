@@ -24,20 +24,24 @@ The repo is intentionally small and easy to audit. Use the bundled agents as a s
   ❯ OpenAI Codex CLI  ›  model
   number to choose · enter = default · b back · q shell
 
-    1  GPT-5.5 (strongest overall)  (default · enter)
-    2  GPT-5.4 (balanced flagship)
-    3  GPT-5.4-mini (fast/cheap, caps at high)
-    4  GPT-5.3 Codex Spark (near-instant, Pro only)
+    1  GPT-5.6 Sol (frontier capability)  (default · enter)
+    2  GPT-5.6 Terra (balanced everyday)
+    3  GPT-5.6 Luna (fast/affordable)
+    4  GPT-5.5 (previous frontier)
+    5  GPT-5.4 (strong everyday)
+    6  GPT-5.4-mini (fast/cost-efficient)
+    7  GPT-5.3 Codex Spark (near-instant, Pro only)
   ❯ 1
 
   ❯ OpenAI Codex CLI  ›  reasoning / effort
   number to choose · enter = default · b back · q shell
 
-    1  Minimal
-    2  Low
-    3  Medium (default)
-    4  High  (default · enter)
-    5  xHigh (gpt-5.5/gpt-5.4 only)
+    1  Low
+    2  Medium  (default · enter)
+    3  High
+    4  xHigh
+    5  Max (gpt-5.6 only)
+    6  Ultra (gpt-5.6 Sol/Terra only)
   ❯
 
   ❯ OpenAI Codex CLI  ›  permission
@@ -48,7 +52,7 @@ The repo is intentionally small and easy to audit. Use the bundled agents as a s
     3  Auto: runs autonomously, no prompts
   ❯
 
-  launching  codex -m gpt-5.5 -c model_reasoning_effort="high" -s workspace-write -a on-request
+  launching  codex -m gpt-5.6-sol -c model_reasoning_effort="medium" -s workspace-write -a on-request
 ```
 
 Only installed agents appear, so the numbers depend on what you have. Each menu shows a `❯` breadcrumb (which agent, which step) and the current directory, a dimmed one-line hint, accent-colored keys, and a clear default marker; permission tiers are color-coded by risk (green safe, red risky).
@@ -111,6 +115,10 @@ Open a new terminal after updating. If you customized `terminal-agent-picker.sh`
 Five agents are verified locally (installed, binary and flags checked): **Claude Code, OpenAI Codex CLI, Google Gemini CLI, opencode, Cursor**. Cursor's binary is verified; its `--model`/`--mode` flags are best-effort, since `cursor-agent --help` prints nothing in a non-tty.
 
 The rest (amp, droid, aider, goose, crush, copilot, qwen, openhands, rovodev, kilo, continue, gptme, kiro, pi, hermes, plandex, openhands-mini) are research-derived and **not locally verified**. They're hidden unless installed; if you rely on one, confirm its flags first. A few launch as a bare TUI and read model/permission from their own config rather than from this menu (goose, droid, crush).
+
+## Latest models
+
+The menus track current frontier defaults (Claude Opus 5 / Sonnet 5, GPT-5.6, Gemini 3.1 Pro). [MODELS.md](MODELS.md) is a dated snapshot of recent releases behind those rows, including open-weight models (Kimi, Qwen, GLM, DeepSeek, Gemma, Llama) for people running local models through opencode, Ollama, LM Studio, or similar. Check it before editing menu entries, and update both together.
 
 ## Permissions and safety
 
@@ -205,6 +213,7 @@ NTAP_myagent_defp=$'standard'
 - `terminal-agent-picker.bash`: small bash entrypoint; sourced from `~/.bashrc`
 - `install.sh`: adds/removes the picker lines (`--uninstall`)
 - `CONTRIBUTING.md`: how to add or change an agent
+- `MODELS.md`: dated snapshot of recent model releases (frontier + open-weight)
 - `NOTES.md`: maintainer/dev notes
 
 ## Uninstall
