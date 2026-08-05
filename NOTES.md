@@ -24,6 +24,7 @@ Internal notes for terminal-agent-picker. For user-facing docs see README.md; fo
 - Claude Fable 5 became generally available on 2026-06-09. Claude Code exposes it through the `fable` alias. It is first in the Claude model menu, but the default remains `sonnet` to avoid surprise cost/latency.
 - Claude Opus 5 released 2026-07-24 (`claude-opus-5`, $5/$25, 1M context default). Claude Code's `opus`/`sonnet` aliases now resolve to Opus 5 / Sonnet 5; the previous generation stays reachable via full ids (`claude-opus-4-8`, `claude-sonnet-4-6`). The old `opus[1m]`/`sonnet[1m]` rows were dropped because the 5-family has 1M context by default.
 - MODELS.md is the dated latest-models snapshot (frontier + open-weight for local runners). Refresh it alongside menu bumps; last verified 2026-08-05 via a 30-day research pass (Reddit/HN/YouTube/GitHub + web).
+- 2026-08-05: research-derived menus (aider, qwen, kilo, gptme, mini-SWE-agent) bumped to the 5-family / GPT-5.6 / Qwen3.8-Max. Those ids are best-effort like the rest of the unverified agents — confirm against each CLI before relying on them.
 - Bare-TUI agents (droid, crush, goose, etc.) do not expose model/reasoning/permission menus here; their settings come from the agent's own config.
 
 ## Design decisions
